@@ -1,0 +1,600 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Kumba Samuel | 3D Artist & FX</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <style>
+    :root {
+      --bg: #050816;
+      --bg-soft: #0b1020;
+      --accent: #87f3ff;
+      --accent-soft: rgba(135, 243, 255, 0.15);
+      --text: #f5f5f5;
+      --muted: #a2a2b8;
+      --card: #101529;
+      --border: #232847;
+      --radius-lg: 18px;
+      --radius-xl: 26px;
+      --shadow-soft: 0 18px 45px rgba(0, 0, 0, 0.6);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
+        sans-serif;
+      background: radial-gradient(circle at top, #141b3a 0, #050816 55%);
+      color: var(--text);
+      line-height: 1.6;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    .page {
+      max-width: 1120px;
+      margin: 0 auto;
+      padding: 24px 18px 60px;
+    }
+
+    header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 32px;
+    }
+
+    .logo {
+      font-weight: 700;
+      font-size: 1.1rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .logo-dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 999px;
+      background: var(--accent);
+      box-shadow: 0 0 18px var(--accent);
+    }
+
+    nav {
+      display: flex;
+      gap: 20px;
+      font-size: 0.9rem;
+      color: var(--muted);
+    }
+
+    nav a:hover {
+      color: var(--accent);
+    }
+
+    /* HERO */
+
+    .hero {
+      display: grid;
+      grid-template-columns: minmax(0, 3fr) minmax(0, 2.5fr);
+      gap: 32px;
+      margin-bottom: 56px;
+      align-items: center;
+    }
+
+    .hero-text h1 {
+      font-size: clamp(2.2rem, 4vw, 3rem);
+      line-height: 1.15;
+      margin-bottom: 16px;
+    }
+
+    .hero-highlight {
+      color: var(--accent);
+    }
+
+    .hero-tagline-main {
+      font-size: 1.05rem;
+      font-weight: 500;
+      margin-bottom: 8px;
+      color: var(--accent);
+    }
+
+    .hero-taglines {
+      font-size: 0.95rem;
+      color: var(--muted);
+      margin-bottom: 18px;
+    }
+
+    .hero-text p {
+      color: var(--muted);
+      max-width: 620px;
+      margin-bottom: 22px;
+    }
+
+    .hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+
+    .btn-primary,
+    .btn-ghost {
+      border-radius: 999px;
+      padding: 9px 18px;
+      font-size: 0.9rem;
+      border: 1px solid transparent;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      cursor: pointer;
+      transition: transform 0.12s ease, box-shadow 0.12s ease, border-color 0.12s ease,
+        background 0.12s ease;
+    }
+
+    .btn-primary {
+      background: linear-gradient(135deg, #4fd1ff, #87f3ff);
+      color: #020308;
+      box-shadow: 0 10px 24px rgba(135, 243, 255, 0.25);
+      border-color: #4fd1ff;
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 16px 30px rgba(135, 243, 255, 0.3);
+    }
+
+    .btn-ghost {
+      border-color: var(--border);
+      background: rgba(11, 16, 32, 0.9);
+      color: var(--muted);
+    }
+
+    .btn-ghost:hover {
+      border-color: var(--accent);
+      color: var(--accent);
+      transform: translateY(-1px);
+    }
+
+    .hero-card {
+      background: radial-gradient(circle at top, #273a66 0, #0b1020 50%, #050816 100%);
+      padding: 20px 20px 24px;
+      border-radius: var(--radius-xl);
+      border: 1px solid var(--border);
+      box-shadow: var(--shadow-soft);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero-orbit {
+      position: absolute;
+      inset: -40%;
+      background: radial-gradient(circle at center, var(--accent-soft), transparent 55%);
+      opacity: 0.8;
+      mix-blend-mode: screen;
+      pointer-events: none;
+    }
+
+    .hero-card-inner {
+      position: relative;
+      z-index: 1;
+    }
+
+    .hero-avatar {
+      width: 72px;
+      height: 72px;
+      border-radius: 24px;
+      border: 1px solid rgba(135, 243, 255, 0.5);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 700;
+      font-size: 1.6rem;
+      margin-bottom: 12px;
+      box-shadow: 0 0 22px rgba(135, 243, 255, 0.35);
+      backdrop-filter: blur(8px);
+      background: rgba(3, 7, 18, 0.7);
+    }
+
+    .hero-role {
+      font-size: 0.95rem;
+      color: var(--muted);
+      margin-bottom: 12px;
+    }
+
+    .hero-pill {
+      display: inline-flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      font-size: 0.75rem;
+      margin-bottom: 14px;
+    }
+
+    .hero-pill span {
+      padding: 4px 10px;
+      border-radius: 999px;
+      background: rgba(12, 18, 46, 0.9);
+      border: 1px solid rgba(135, 243, 255, 0.25);
+      color: var(--muted);
+    }
+
+    .hero-metrics {
+      display: flex;
+      gap: 16px;
+      font-size: 0.75rem;
+      color: var(--muted);
+      margin-top: 10px;
+    }
+
+    .hero-metrics strong {
+      display: block;
+      font-size: 1rem;
+      color: var(--text);
+    }
+
+    /* SECTIONS */
+
+    section {
+      margin-bottom: 44px;
+    }
+
+    .section-title {
+      font-size: 1rem;
+      text-transform: uppercase;
+      letter-spacing: 0.2em;
+      color: var(--muted);
+      margin-bottom: 10px;
+    }
+
+    .section-heading {
+      font-size: 1.4rem;
+      margin-bottom: 14px;
+    }
+
+    .section-description {
+      font-size: 0.95rem;
+      color: var(--muted);
+      max-width: 640px;
+      margin-bottom: 18px;
+    }
+
+    /* ABOUT */
+
+    .about-card {
+      background: var(--bg-soft);
+      border-radius: var(--radius-lg);
+      padding: 18px 20px;
+      border: 1px solid var(--border);
+    }
+
+    /* SKILLS */
+
+    .skills-grid {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    .skill-pill {
+      padding: 7px 13px;
+      border-radius: 999px;
+      background: rgba(10, 17, 41, 0.96);
+      border: 1px solid #232847;
+      font-size: 0.85rem;
+      color: var(--muted);
+    }
+
+    /* PROJECTS */
+
+    .projects-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 18px;
+    }
+
+    .project-card {
+      background: var(--card);
+      border-radius: var(--radius-lg);
+      padding: 14px 14px 16px;
+      border: 1px solid var(--border);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .project-tag {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      font-size: 0.7rem;
+      padding: 4px 10px;
+      border-radius: 999px;
+      background: rgba(135, 243, 255, 0.07);
+      border: 1px solid rgba(135, 243, 255, 0.4);
+      color: var(--accent);
+    }
+
+    .project-title {
+      font-size: 0.98rem;
+      margin-bottom: 4px;
+    }
+
+    .project-role {
+      font-size: 0.78rem;
+      color: var(--muted);
+      margin-bottom: 8px;
+    }
+
+    .project-desc {
+      font-size: 0.86rem;
+      color: var(--muted);
+      margin-bottom: 8px;
+    }
+
+    .project-tools {
+      font-size: 0.75rem;
+      color: var(--muted);
+    }
+
+    /* CONTACT */
+
+    .contact-card {
+      background: var(--bg-soft);
+      border-radius: var(--radius-lg);
+      padding: 18px 20px;
+      border: 1px solid var(--border);
+      display: flex;
+      flex-wrap: wrap;
+      gap: 16px;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .contact-email {
+      font-size: 1rem;
+    }
+
+    .contact-email a {
+      color: var(--accent);
+      font-weight: 500;
+    }
+
+    .contact-note {
+      font-size: 0.85rem;
+      color: var(--muted);
+      max-width: 360px;
+    }
+
+    footer {
+      margin-top: 30px;
+      font-size: 0.76rem;
+      color: var(--muted);
+      display: flex;
+      justify-content: space-between;
+      gap: 10px;
+    }
+
+    /* RESPONSIVE */
+
+    @media (max-width: 840px) {
+      .hero {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media (max-width: 720px) {
+      .projects-grid {
+        grid-template-columns: 1fr;
+      }
+
+      header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 10px;
+      }
+
+      nav {
+        font-size: 0.8rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="page">
+    <header>
+      <div class="logo">
+        <span class="logo-dot"></span>
+        KUMBA SAMUEL
+      </div>
+      <nav>
+        <a href="#about">About</a>
+        <a href="#skills">Skills</a>
+        <a href="#projects">Projects</a>
+        <a href="#contact">Contact</a>
+      </nav>
+    </header>
+
+    <!-- HERO -->
+    <section class="hero">
+      <div class="hero-text">
+        <p class="hero-tagline-main">Sculpting virtual realities in 3D.</p>
+        <h1>
+          Where ideas <span class="hero-highlight">take form</span><br />
+          &amp; dimensions speak.
+        </h1>
+        <div class="hero-taglines">
+          Your vision, our blueprint · Dimensions that speak, designs that shine
+        </div>
+        <p>
+          I’m <strong>Kumba Samuel</strong>, a 3D artist and game designer
+          working with Maya, Maya FX, Unreal Engine, Unity, After Effects, and
+          Premiere Pro. I create game assets, VFX shots, and motion graphics that
+          turn ideas into visual experiences.
+        </p>
+        <div class="hero-actions">
+          <a href="#projects" class="btn-primary">View Projects</a>
+          <a href="#contact" class="btn-ghost">Contact Me</a>
+        </div>
+      </div>
+
+      <aside class="hero-card">
+        <div class="hero-orbit"></div>
+        <div class="hero-card-inner">
+          <div class="hero-avatar">KS</div>
+          <div class="hero-role">3D Artist · Game Designer · FX</div>
+          <div class="hero-pill">
+            <span>Maya / Maya FX</span>
+            <span>Unreal Engine</span>
+            <span>Unity</span>
+            <span>After Effects</span>
+          </div>
+          <p class="project-desc">
+            From rough concept to final render or in-engine shot, I design and
+            build 3D scenes, FX, and motion graphics that feel dynamic and clear.
+          </p>
+          <div class="hero-metrics">
+            <div>
+              <strong>3D</strong>
+              modeling &amp; FX work
+            </div>
+            <div>
+              <strong>Video</strong>
+              edit &amp; motion design
+            </div>
+          </div>
+        </div>
+      </aside>
+    </section>
+
+    <!-- ABOUT -->
+    <section id="about">
+      <div class="section-title">About</div>
+      <h2 class="section-heading">Who I am</h2>
+      <p class="section-description">
+        I like to turn ideas into 3D shapes, visual effects, and simple stories on screen.
+      </p>
+      <div class="about-card">
+        <p>
+          I’m a 3D artist and game designer with basic to intermediate knowledge in
+          <strong>Maya, Maya FX, Unreal Engine, Unity, After Effects, and Premiere Pro</strong>.
+          I enjoy building scenes, FX, and edits that feel smooth and readable.
+        </p>
+        <br />
+        <p>
+          My focus is on clear forms, strong silhouettes, simple but effective lighting,
+          and FX that support the scene. I am still learning and improving, project by project,
+          and I like combining game tools with video tools to create small presentations.
+        </p>
+      </div>
+    </section>
+
+    <!-- SKILLS -->
+    <section id="skills">
+      <div class="section-title">Skills</div>
+      <h2 class="section-heading">What I work with</h2>
+      <p class="section-description">
+        Tools and areas I use to build 3D scenes, FX, and motion graphics.
+      </p>
+      <div class="skills-grid">
+        <div class="skill-pill">Maya</div>
+        <div class="skill-pill">Maya FX / Effects</div>
+        <div class="skill-pill">Unreal Engine</div>
+        <div class="skill-pill">Unity</div>
+        <div class="skill-pill">After Effects</div>
+        <div class="skill-pill">Premiere Pro</div>
+        <div class="skill-pill">Environment &amp; Level Basics</div>
+        <div class="skill-pill">Real-time 3D Basics</div>
+      </div>
+    </section>
+
+    <!-- PROJECTS -->
+    <section id="projects">
+      <div class="section-title">Projects</div>
+      <h2 class="section-heading">Selected work</h2>
+      <p class="section-description">
+        A mix of motion graphics and 3D FX work created using After Effects and Maya.
+      </p>
+
+      <div class="projects-grid">
+        <!-- Project 1 – After Effects Assignment -->
+        <article class="project-card">
+          <div class="project-tag">Motion Graphics</div>
+          <h3 class="project-title">After Effects Assignment</h3>
+          <div class="project-role">Video Editor</div>
+          <p class="project-desc">
+            A short motion graphics assignment edited in Adobe After Effects.
+            I explored basic animation, timing, and transitions, and also used
+            Premiere Pro for simple video workflow.
+          </p>
+          <div class="project-tools">
+            Tools: After Effects · Premiere Pro
+          </div>
+        </article>
+
+        <!-- Project 2 – Maya VFX Presentation -->
+        <article class="project-card">
+          <div class="project-tag">VFX · 3D</div>
+          <h3 class="project-title">Maya VFX Presentation</h3>
+          <div class="project-role">VFX Artist</div>
+          <p class="project-desc">
+            A VFX presentation created in Maya. I used particle simulations and FX
+            shots to build a small cinematic style sequence, focusing on timing and
+            simple camera moves.
+          </p>
+          <div class="project-tools">
+            Tools: Maya · Maya FX
+          </div>
+        </article>
+
+        <!-- Project 3 – Maya FX -->
+        <article class="project-card">
+          <div class="project-tag">FX</div>
+          <h3 class="project-title">Maya FX</h3>
+          <div class="project-role">FX Artist</div>
+          <p class="project-desc">
+            Custom visual effects created in Maya using particle systems and basic
+            simulations. I focused on timing, motion, and dynamic behavior to support
+            simple cinematic scenes.
+          </p>
+          <div class="project-tools">
+            Tools: Maya · Maya FX
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <!-- CONTACT -->
+    <section id="contact">
+      <div class="section-title">Contact</div>
+      <h2 class="section-heading">Let’s connect</h2>
+      <div class="contact-card">
+        <div>
+          <div class="contact-email">
+            Email: <a href="mailto:kumbhasamuel123@gmail.com">kumbhasamuel123@gmail.com</a>
+          </div>
+          <div class="contact-note">
+            You can email me for 3D, FX, or motion graphics work. I am open to
+            internships, freelance, and beginner-level opportunities.
+          </div>
+        </div>
+        <a href="mailto:kumbhasamuel123@gmail.com" class="btn-primary">Send Email</a>
+      </div>
+    </section>
+
+    <footer>
+      <div>© <span id="year"></span> Kumba Samuel · 3D &amp; FX</div>
+      <div>Portfolio built with HTML &amp; CSS</div>
+    </footer>
+  </div>
+
+  <script>
+    document.getElementById("year").textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>
